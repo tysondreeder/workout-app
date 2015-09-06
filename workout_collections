@@ -1,0 +1,16 @@
+create or replace view `workout_collections` as
+    select 
+        workouts.workout_name,
+        workouts.workout_days,
+        counts.count,
+        exercises.exercise_name,
+        workouts_has_exercise.exercise_weight
+    from
+        workouts,
+        workouts_has_exercise,
+        counts,
+        exercises
+    where
+        workouts_has_exercise.workout_id = workouts.workout_id
+            and workouts_has_exercise.count_id = counts.count_id
+            and workouts_has_exercise.exercise_id = exercises.exercise_id

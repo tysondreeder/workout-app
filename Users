@@ -1,0 +1,8 @@
+CREATE VIEW `Users` AS
+    select 
+        users . *, config . *
+    from
+        users,
+        config
+    where
+        users.user_id = config.user_id
