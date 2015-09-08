@@ -1,6 +1,4 @@
-<?php
-
-namespace App;
+<?php namespace App;
 
 use Illuminate\Http\Request;
 use App\Model as BaseModel;
@@ -48,7 +46,7 @@ class ConfigModel extends BaseModel
      *
      * @return mixed
      */
-    public function showID($id)
+    public function showId($id)
     {
         $array = array(
             'weight_type',

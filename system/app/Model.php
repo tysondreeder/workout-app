@@ -39,7 +39,7 @@ abstract class Model extends BaseModel
      *
      * @return mixed
      */
-    abstract public function showID($id);
+    abstract public function showId($id);
 
     /**
      * Update a record. Use setUpdate().
