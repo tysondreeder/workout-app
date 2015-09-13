@@ -3,37 +3,34 @@
 use Illuminate\Http\Request;
 use App\Model as BaseModel;
 
-class ConfigModel extends BaseModel
+class SharedWorkoutsModel extends BaseModel
 {
     /**
      * Display a listing of the resource.
      *
-     * @return mixed
+     * @return Response
      */
     public function showAll()
     {
-        return $this->getAll('config');
+        return $this->getAll('shared_workouts');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
-     *
-     * @return mixed
+     * @return Response
      */
     public function postInsert($request)
     {
         $required = array(
-            'user_id',
-            'weight_type',
-            'language',
-            'start_of_week'
+            'workout_id',
+            'share_id'
         );
 
         return $this->setInsert(
             $required,
-            'config',
+            'shared_workouts',
             $request
         );
     }
@@ -42,23 +39,16 @@ class ConfigModel extends BaseModel
      * Display the specified resource.
      *
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function showId($id)
     {
         $array = array(
-            'weight_type',
-            'language',
-            'start_of_week'
+            'workout_id',
+            'synced'
         );
 
-        return $this->getId(
-            'config',
-            $array,
-            'config_id',
-            $id
-        );
+        return $this->getId('shared_workouts', $array, 'share_id', $id);
     }
 
     /**
@@ -66,14 +56,13 @@ class ConfigModel extends BaseModel
      *
      * @param  Request  $request
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function putUpdate($request, $id)
     {
         return $this->setUpdate(
-            'config',
-            'config_id',
+            'shared_workouts',
+            'share_id',
             $request,
             $id
         );
@@ -83,14 +72,13 @@ class ConfigModel extends BaseModel
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function doDelete($id)
     {
         return $this->setDelete(
-            'config',
-            'config_id',
+            'shared_workouts',
+            'share_id',
             $id
         );
     }

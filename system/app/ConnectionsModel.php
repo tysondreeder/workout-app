@@ -32,7 +32,6 @@ class ConnectionsModel extends BaseModel
 
         return $this->setInsert(
             $required,
-            '',
             'connections',
             $request
         );
@@ -66,7 +65,6 @@ class ConnectionsModel extends BaseModel
     public function putUpdate($request, $id)
     {
         return $this->setUpdate(
-            '',
             'connections',
             'share_id',
             $request,

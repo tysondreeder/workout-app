@@ -31,7 +31,6 @@ class CountsModel extends BaseModel
 
         return $this->setInsert(
             $required,
-            '',
             'counts',
             $request
         );
@@ -69,7 +68,6 @@ class CountsModel extends BaseModel
     public function putUpdate($request, $id)
     {
         return $this->setUpdate(
-            '',
             'counts',
             'count_id',
             $request,

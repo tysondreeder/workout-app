@@ -3,37 +3,35 @@
 use Illuminate\Http\Request;
 use App\Model as BaseModel;
 
-class ConfigModel extends BaseModel
+class WeightsModel extends BaseModel
 {
     /**
      * Display a listing of the resource.
      *
-     * @return mixed
+     * @return Response
      */
     public function showAll()
     {
-        return $this->getAll('config');
+        return $this->getAll('weights');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
-     *
-     * @return mixed
+     * @return Response
      */
     public function postInsert($request)
     {
         $required = array(
-            'user_id',
-            'weight_type',
-            'language',
-            'start_of_week'
+            'lb',
+            'kg'
         );
 
         return $this->setInsert(
             $required,
-            'config',
+            '',
+            'weights',
             $request
         );
     }
@@ -42,21 +40,19 @@ class ConfigModel extends BaseModel
      * Display the specified resource.
      *
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function showId($id)
     {
         $array = array(
-            'weight_type',
-            'language',
-            'start_of_week'
+            'lb',
+            'kg'
         );
 
         return $this->getId(
-            'config',
+            'weights',
             $array,
-            'config_id',
+            'weight_id',
             $id
         );
     }
@@ -66,14 +62,14 @@ class ConfigModel extends BaseModel
      *
      * @param  Request  $request
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function putUpdate($request, $id)
     {
         return $this->setUpdate(
-            'config',
-            'config_id',
+            '',
+            'weights',
+            'weight_id',
             $request,
             $id
         );
@@ -83,14 +79,13 @@ class ConfigModel extends BaseModel
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     *
-     * @return mixed
+     * @return Response
      */
     public function doDelete($id)
     {
         return $this->setDelete(
-            'config',
-            'config_id',
+            'weights',
+            'weight_id',
             $id
         );
     }
