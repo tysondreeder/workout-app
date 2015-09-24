@@ -31,9 +31,9 @@ class UsersModel extends BaseModel
 
         return $this->setInsert(
             $required,
-            'user_',
             'users',
-            $request
+            $request,
+            'user_'
         );
     }
 
@@ -71,11 +71,11 @@ class UsersModel extends BaseModel
     public function putUpdate($request, $id)
     {
         return $this->setUpdate(
-            'user_',
             'users',
             'user_id',
             $request,
-            $id
+            $id,
+            'user_'
         );
     }
 

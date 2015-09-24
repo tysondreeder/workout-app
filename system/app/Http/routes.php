@@ -25,3 +25,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::resource('workout-collections', 'WorkoutsViewController');
     Route::resource('workout-exercises', 'WorkoutsHasExercisesController');
 });
+
+Route::controller(
+    'auth/token', 'Auth\Token'
+);

@@ -28,14 +28,21 @@ class Actions extends BaseModel
         $data = new \stdClass;
 
         try {
-            $data->response = DB::table($table)
+            $response = DB::table($table)
                 ->get();
 
-            $data->code = 200;
+            $reformattedResponse = array();
+            foreach($response as $k => $v) {
+                $reformattedResponse[] = $this->jsonMap(get_object_vars($v));
+            }
 
-            if(empty($data->response) === true) {
+            if(empty($response) === true) {
                 throw new \Exception(sprintf('There was no response from the %s table', $table), 400);
             }
+
+            $data->response = $reformattedResponse;
+            $data->code = 200;
+
 
         } catch (\Exception $e) {
             $data->message = $e->getMessage();
@@ -64,16 +71,19 @@ class Actions extends BaseModel
                 throw new \Exception('Column set needs to be in array format.', 400);
             }
 
-            $data->response = DB::table($table)
+            $response = DB::table($table)
                 ->select($selectArray)
                 ->where($where, $id)
                 ->get();
 
-            $data->code = 200;
-
-            if(empty($data->response) === true) {
+            if(empty($response) === true) {
                 throw new \Exception(sprintf('There was no response from the %s table', $table), 400);
             }
+
+            $reformattedResponse = $this->jsonMap(get_object_vars($response[0]));
+
+            $data->response = $reformattedResponse;
+            $data->code = 200;
 
         } catch (\Exception $e) {
             $data->message = $e->getMessage();
@@ -150,7 +160,7 @@ class Actions extends BaseModel
         try{
             $return = DB::table($table)
                 ->where($where, $id)
-                ->update(get_object_vars($data));
+                ->update($data->inputs);
 
             if($return === false) {
                 throw new \Exception(sprintf("Data update failed on id %s in %s table", $id, $table), 400);
@@ -241,5 +251,15 @@ class Actions extends BaseModel
             $data[$name] = $input;
         }
         return $data;
+    }
+
+    protected function jsonMap($array)
+    {
+        $response = array();
+        foreach($array as $k => $v) {
+            $response[$k] = (is_object($decoded = json_decode($v)) === true) ? $decoded : $v;
+        }
+
+        return $response;
     }
 }
