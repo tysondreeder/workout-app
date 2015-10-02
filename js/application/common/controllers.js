@@ -1,1 +1,1 @@
-wc.controllers = angular.module('wc.controllers', ['wc.controllers.users']);
+wc.controllers = angular.module('wc.controllers', ['wc.controllers.users', 'wc.controllers.appConfig']);

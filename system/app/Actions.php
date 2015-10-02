@@ -77,7 +77,7 @@ class Actions extends BaseModel
                 ->get();
 
             if(empty($response) === true) {
-                throw new \Exception(sprintf('There was no response from the %s table', $table), 400);
+                throw new \Exception(sprintf('There was no response from the %s table', $table), 404);
             }
 
             $reformattedResponse = $this->jsonMap(get_object_vars($response[0]));

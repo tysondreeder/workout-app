@@ -1,0 +1,8 @@
+/system/vendor
+/system/node_modules
+Homestead.yaml
+Homestead.json
+system/.env
+/.idea
+/report
+

@@ -1,6 +1,6 @@
-wc.controllers.users = angular.module('wc.controllers.users', ['wc.services.users']);
+wc.controllers.appConfig = angular.module('wc.controllers.appConfig', ['wc.services.appConfig']);
 
-wc.controllers.users.controller('usersController', ['$scope', 'UserFactory', function($scope, user) {
+wc.controllers.appConfig.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
     //var user = UserFactory;
     var params = {
         email: 'juliane302@hotmail.com',
@@ -10,5 +10,5 @@ wc.controllers.users.controller('usersController', ['$scope', 'UserFactory', fun
         bmi : 10,
         password: 'superwoman4589'
     }
-    console.log(user.get(5));
+    console.log(config.get(1));
 }]);

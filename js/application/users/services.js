@@ -1,77 +1,46 @@
 wc.services.users = angular.module('wc.services.users', ['ngResource']);
 
-wc.services.users.factory('UserFactory', ['$resource', '$log', 'API', '$q',
-    function($resource, $log, API, $q) {
-
-    var url = API.v1.users.user;
-    var urlUserData = API.v1.users.data;
-
-    var User = function(user) {
-        this.id = null;
-
-        if(angular.isDefined(user) === true) {
-            angular.extend(this, user);
-        }
+wc.services.users.factory('UserApiFactory', ['URISettings', function (URISettings) {
+    var url = {};
+    url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
+    var users = {
+        user: url.parts + '/users',
+        data: url.parts + '/user-collections'
     };
 
-    User.prototype.get = function() {
-        var deferred = $q.defer();
-        var response = null;
+    return users;
+}]);
 
-        if(this.id === null) {
-            response = $resource(url, {}).get();
-        } else {
-            response = $resource(url + '/:id', {id: this.id}).get();
-        }
+wc.services.users.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$http',
+    function(ResponseFactory, UserApiFactory, $http) {
 
-        response.$promise.then(function(callback) {
-            deferred.resolve(callback);
-        }, function(error) {
-            deferred.reject(error);
-        });
+    var url = UserApiFactory,
+        response = ResponseFactory,
+        resource;
 
-        return deferred.promise;
+    this.get = function(id) {
+        resource = $http.get(url.data + '/' + id);
+
+        return response(resource);
     };
 
-    User.prototype.getData = function() {
-        var deferred = $q.defer();
-        var response = null;
+    this.post = function(params) {
+        resource = $http.post(url.user, {params: params});
 
-        if(this.id === null) {
-            return false;
-        } else {
-            response = $resource(urlUserData + '/:id', {id: this.id}).get();
-        }
-
-        response.$promise.then(function(callback) {
-            deferred.resolve(callback);
-        }, function(error) {
-            deferred.reject(error);
-        });
-
-        return deferred.promise;
+        return response(resource);
     };
 
-    User.prototype.save = function(params) {
-        var deferred = $q.defer();
-        var response = null;
-        var updateMethod = { update: {method: 'PUT'}};
+    this.put = function(id, params) {
+        resource = $http.put(url.user + '/' + id, {params: params});
 
-        if(this.id === null) {
-            response = $resource(url).save(params);
-        } else {
-            response = $resource(url + '/:id', {id: this.id}, updateMethod).update(params);
-        }
-
-        response.$promise.then(function(callback) {
-            deferred.resolve(callback)
-        }, function(error) {
-            $log.log(error);
-            deferred.reject(error);
-        });
-
-        return deferred.promise;
+        return response(resource);
     };
 
-    return User;
+    this.delete = function(id) {
+        resource = $http.delete(url.user + '/' + id);
+
+        return response(resource);
+    };
+
+    return this;
 }]);
