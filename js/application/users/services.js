@@ -1,6 +1,6 @@
-wc.services.users = angular.module('wc.services.users', ['ngResource']);
+users.services = angular.module('users.services', ['ngResource']);
 
-wc.services.users.factory('UserApiFactory', ['URISettings', function (URISettings) {
+users.services.factory('UserApiFactory', ['URISettings', function (URISettings) {
     var url = {};
     url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
     var users = {
@@ -11,7 +11,7 @@ wc.services.users.factory('UserApiFactory', ['URISettings', function (URISetting
     return users;
 }]);
 
-wc.services.users.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$http',
+users.services.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$http',
     function(ResponseFactory, UserApiFactory, $http) {
 
     var url = UserApiFactory,

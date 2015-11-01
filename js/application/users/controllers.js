@@ -1,6 +1,6 @@
-wc.controllers.users = angular.module('wc.controllers.users', ['wc.services.users']);
+users.controllers = angular.module('users.controllers', ['users.services']);
 
-wc.controllers.users.controller('usersController', ['$scope', 'UserFactory', function($scope, user) {
+users.controllers.controller('usersController', ['$scope', 'UserFactory', function($scope, user) {
     //var user = UserFactory;
     var params = {
         email: 'juliane302@hotmail.com',

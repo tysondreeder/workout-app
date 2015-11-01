@@ -1,6 +1,6 @@
-wc.controllers.appConfig = angular.module('wc.controllers.appConfig', ['wc.services.appConfig']);
+appConfig.controllers = angular.module('appConfig.controllers', ['appConfig.services']);
 
-wc.controllers.appConfig.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
+appConfig.controllers.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
     //var user = UserFactory;
     var params = {
         email: 'juliane302@hotmail.com',

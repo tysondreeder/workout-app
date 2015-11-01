@@ -1,13 +1,13 @@
-wc.services.appConfig = angular.module('wc.services.appConfig', ['ngResource']);
+appConfig.services = angular.module('appConfig.services', ['ngResource']);
 
-wc.services.appConfig.factory('AppConfigApiFactory', ['URISettings', function (URISettings) {
+appConfig.services.factory('AppConfigApiFactory', ['URISettings', function (URISettings) {
     var url = {};
     url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
 
     return url.parts + '/config';
 }]);
 
-wc.services.appConfig.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApiFactory', '$http',
+appConfig.services.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApiFactory', '$http',
     function(ResponseFactory, AppConfigApiFactory, $http) {
 
     var url = AppConfigApiFactory,

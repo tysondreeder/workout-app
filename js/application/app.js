@@ -1,4 +1,4 @@
-var wc = angular.module('wc.app', ['wc.services', 'wc.controllers']);
+var wc = angular.module('wc.app', ['appConfig.module', 'common.module', 'users.module']);
 
 wc.constant('URISettings',
     {

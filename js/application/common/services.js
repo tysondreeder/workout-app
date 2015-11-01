@@ -1,4 +1,4 @@
-wc.services = angular.module('wc.services', ['wc.services.users', 'wc.services.appConfig']);
+common.services = angular.module('common.services', []);
 
 //wc.services.factory('API', ['URISettings', function(URISettings) {
 //    var url = {};
@@ -30,7 +30,7 @@ wc.services = angular.module('wc.services', ['wc.services.users', 'wc.services.a
 
 
 
-wc.services.factory('ResponseFactory', ['$q', function($q) {
+common.services.factory('ResponseFactory', ['$q', function($q) {
     return function(resource) {
         var q = $q.defer();
 
