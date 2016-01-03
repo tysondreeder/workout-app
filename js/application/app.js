@@ -6,4 +6,4 @@ wc.constant('URISettings',
         apiUri: '//wc.mbautista.com/api',
         version: '/v1'
     }
-)
+);

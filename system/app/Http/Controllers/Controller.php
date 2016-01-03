@@ -111,7 +111,7 @@ abstract class Controller extends BaseController
             $this->validate($required, get_object_vars($data));
 
             if(empty($this->errors) === false) {
-                throw new \Exception(sprintf('The following fields are incomplete: %s', implode(', ', $this->errors)), 421);
+                throw new \Exception(sprintf('The following fields are incomplete: %s', implode(', ', $this->errors)), 400);
             }
 
             $return = DB::table($table)
