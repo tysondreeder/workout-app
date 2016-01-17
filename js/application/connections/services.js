@@ -1,10 +1,14 @@
 appConfig.services = angular.module('appConfig.services', ['ngResource']);
 
-appConfig.services.factory('AppConfigApiFactory', ['URISettings', function (URISettings) {
+appConfig.services.factory('ApiFactory', ['URISettings', function (URISettings) {
     var url = {};
     url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
+    var users = {
+        user: url.parts + '/users',
+        data: url.parts + '/user-collections'
+    };
 
-    return url.parts + '/config';
+    return users;
 }]);
 
 appConfig.services.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApiFactory', '$http',

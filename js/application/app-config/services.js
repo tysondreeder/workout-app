@@ -32,7 +32,7 @@ appConfig.services.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApi
         return response(resource);
     };
 
-    this.delete = function(id) {
+    this.remove = function(id) {
         resource = $http.delete(url + '/' + id);
 
         return response(resource);

@@ -1,39 +1,41 @@
-appConfig.services = angular.module('appConfig.services', ['ngResource']);
+exercises.services = angular.module('appConfig.services', ['ngResource']);
 
-appConfig.services.factory('AppConfigApiFactory', ['URISettings', function (URISettings) {
+exercises.services.factory('ExercisesApiFactory', ['URISettings', function (URISettings) {
     var url = {};
     url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
 
-    return url.parts + '/config';
+    return url.parts + '/exercises';
 }]);
 
-appConfig.services.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApiFactory', '$http',
-    function(ResponseFactory, AppConfigApiFactory, $http) {
+exercises.services.factory('ExercisesFactory', ['ResponseFactory', 'ExercisesApiFactory', '$http',
+    function(response, url, $http) {
 
-    var url = AppConfigApiFactory,
-        response = ResponseFactory,
-        resource;
+    var resource;
 
     this.get = function(id) {
-        resource = $http.get(url + '/' + id);
+        resource = $http.get(url.exercises + '/' + id);
+        return response(resource);
+    };
 
+    this.getAll = function(id) {
+        resource = $http.get(url.exercises + '/');
         return response(resource);
     };
 
     this.post = function(params) {
-        resource = $http.post(url, params);
+        resource = $http.post(url.exercises, params);
 
         return response(resource);
     };
 
     this.put = function(id, params) {
-        resource = $http.put(url + '/' + id, params);
+        resource = $http.put(url.exercises + '/' + id, params);
 
         return response(resource);
     };
 
-    this.delete = function(id) {
-        resource = $http.delete(url + '/' + id);
+    this.remove = function(id) {
+        resource = $http.delete(url.exercises + '/' + id);
 
         return response(resource);
     };

@@ -3,10 +3,12 @@ users.services = angular.module('users.services', ['ngResource']);
 users.services.factory('UserApiFactory', ['URISettings', function (URISettings) {
     var url = {};
     url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
-    return  {
+    var users = {
         user: url.parts + '/users',
         data: url.parts + '/user-collections'
     };
+
+    return users;
 }]);
 
 users.services.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$http',
@@ -34,7 +36,7 @@ users.services.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$ht
         return response(resource);
     };
 
-    this.remove = function(id) {
+    this.delete = function(id) {
         resource = $http.delete(url.user + '/' + id);
 
         return response(resource);

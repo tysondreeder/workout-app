@@ -117,7 +117,7 @@ class Actions extends BaseModel
             $this->validate($required, $data->inputs);
 
             if(empty($this->errors) === false) {
-                throw new \Exception(sprintf('The following fields are incomplete: %s', implode(', ', $this->errors)), 421);
+                throw new \Exception(sprintf('The following fields are incomplete: %s', implode(', ', $this->errors)), 400);
             }
 
             $return = DB::table($table)
