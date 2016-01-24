@@ -1,0 +1,1 @@
+var exercises = angular.module('exercises.module', ['exercises.services', 'exercises.controllers']);

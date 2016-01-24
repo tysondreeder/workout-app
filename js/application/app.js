@@ -1,4 +1,4 @@
-var wc = angular.module('wc.app', ['appConfig.module', 'common.module', 'users.module']);
+var wc = angular.module('wc.app', ['ngRoute', 'appConfig.module', 'common.module', 'users.module']);
 
 wc.constant('URISettings',
     {
@@ -7,3 +7,10 @@ wc.constant('URISettings',
         version: '/v1'
     }
 );
+
+wc.config(function($routeProvider, $locationProvider) {
+    $routeProvider
+        .when('/exercise', {
+            templateUrl: 'js/application/workouts/views/exercises.html'
+        });
+});

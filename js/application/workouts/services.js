@@ -1,4 +1,4 @@
-workouts.services = angular.module('appConfig.services', ['ngResource']);
+workouts.services = angular.module('workouts.services', ['ngResource']);
 
 workouts.services.factory('WorkoutsApiFactory', ['URISettings', function (URISettings) {
     var url = {};

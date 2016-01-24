@@ -1,0 +1,1 @@
+workouts.directives = angular.module('workouts.directives', ['workouts.controllers']);

@@ -33,9 +33,9 @@ class WorkoutsHasExercisesModel extends BaseModel
 
         return $this->setInsert(
             $required,
-            '',
             'workouts_has_exercise',
-            $request
+            $request,
+            ''
         );
     }
 

@@ -1,6 +1,6 @@
-appConfig.controllers = angular.module('appConfig.controllers', ['appConfig.services']);
+exercises.controllers = angular.module('appConfig.controllers', ['appConfig.services']);
 
-appConfig.controllers.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
+exercises.controllers.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
     //var user = UserFactory;
     //var params = {
     //    email: 'juliane302@hotmail.com',
@@ -15,6 +15,6 @@ appConfig.controllers.controller('appConfigController', ['$scope', 'AppConfigFac
         weight_type: "kg",
         language: "english",
         start_of_week: "Sunday"
-    }
+    };
     console.log(config.post(params));
 }]);
