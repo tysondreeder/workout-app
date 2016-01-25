@@ -3,6 +3,9 @@ workouts.directives = angular.module('workouts.directives', ['workouts.controlle
 workouts.directives.directive('workoutList', function(){
     return {
         templateUrl: 'js/application/workouts/views/list.html',
-        controller: 'workoutCollectionsController'
+        controller: 'workoutCollectionsController',
+        link: function(scope) {
+            scope.workoutsList = scope.allWorkouts;
+        }
     }
 });

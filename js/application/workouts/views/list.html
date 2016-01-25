@@ -1,3 +1,4 @@
-<div ng-repeat="exercises in allWorkouts">
-{{exercises.exercise_name}}
+
+<div ng-repeat="exercises in workoutsList.$$state.value.data.response">
+{{exercises}}
 </div>
