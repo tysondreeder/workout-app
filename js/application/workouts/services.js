@@ -12,7 +12,7 @@ workouts.services.factory('WorkoutsApiFactory', ['URISettings', function (URISet
 }]);
 
 workouts.services.factory('WorkoutCollectionsFactory', ['ResponseFactory', 'WorkoutsApiFactory', '$http',
-    function(ResponseFactory, WorkoutApiFactory, $http) {
+    function(ResponseFactory, WorkoutsApiFactory, $http) {
 
     var url = WorkoutsApiFactory,
         response = ResponseFactory,
@@ -24,7 +24,7 @@ workouts.services.factory('WorkoutCollectionsFactory', ['ResponseFactory', 'Work
     };
 
     this.getAll = function() {
-        resource = $http.get(url.workoutCollections + '/');
+        resource = $http.get(url.workoutCollections);
         return response(resource);
     };
 

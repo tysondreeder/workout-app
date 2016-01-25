@@ -1,4 +1,4 @@
-var wc = angular.module('wc.app', ['ngRoute', 'appConfig.module', 'common.module', 'users.module']);
+var wc = angular.module('wc.app', ['ngRoute', 'appConfig.module', 'common.module', 'users.module', 'workouts.module']);
 
 wc.constant('URISettings',
     {
@@ -11,6 +11,6 @@ wc.constant('URISettings',
 wc.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/exercise', {
-            templateUrl: 'js/application/workouts/views/exercises.html'
+            templateUrl: 'js/application/workouts/templates/exercises.html'
         });
 });
