@@ -1,42 +1,41 @@
-appConfig.services = angular.module('appConfig.services', ['ngResource']);
+'use strict';
 
-appConfig.services.factory('AppConfigApiFactory', ['URISettings', function (URISettings) {
-    var url = {};
-    url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
+wc
+    .module('workout.service', ['ngResource'])
+    .factory('WorkoutService', ['API', 'ResponseFactory', '$http',
+        function(API, ResponseFactory, $http) {
 
-    return url.parts + '/config';
-}]);
+            var url = API.parts +  + '/workout',
+                response = ResponseFactory,
+                resource;
 
-appConfig.services.factory('AppConfigFactory', ['ResponseFactory', 'AppConfigApiFactory', '$http',
-    function(ResponseFactory, AppConfigApiFactory, $http) {
+            this.get = function(id) {
+                resource = $http.get(url + '/' + id);
+                return response(resource);
+            };
 
-    var url = AppConfigApiFactory,
-        response = ResponseFactory,
-        resource;
+            this.getAll = function() {
+                resource = $http.get(url + '/');
+                return response(resource);
+            };
 
-    this.get = function(id) {
-        resource = $http.get(url + '/' + id);
+            this.post = function(params) {
+                resource = $http.post(url, params);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.post = function(params) {
-        resource = $http.post(url, params);
+            this.put = function(id, params) {
+                resource = $http.put(url + '/' + id, params);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.put = function(id, params) {
-        resource = $http.put(url + '/' + id, params);
+            this.remove = function(id) {
+                resource = $http.delete(url + '/' + id);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.delete = function(id) {
-        resource = $http.delete(url + '/' + id);
-
-        return response(resource);
-    };
-
-    return this;
+            return this;
 }]);

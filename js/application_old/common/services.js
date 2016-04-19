@@ -1,7 +1,7 @@
 'use strict';
 
-wc
-    .module('CommonServices', [])
+angular
+    .module('common.service', [])
     .factory('API', ['URISettings', function(URISettings) {
         var url = {};
         url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;

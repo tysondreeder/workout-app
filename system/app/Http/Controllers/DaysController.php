@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\WorkoutsView;
+use App\DaysModel;
 
 use Illuminate\Routing\Controller as BaseController;
 
-class WorkoutsViewController extends BaseController
+class DaysController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class WorkoutsViewController extends BaseController
      */
     public function index()
     {
-        return (new WorkoutsView)->showAll();
+        return (new DaysModel)->showAll();
     }
 
     /**
@@ -25,6 +25,7 @@ class WorkoutsViewController extends BaseController
      */
     public function show($id)
     {
-        return (new WorkoutsView)->showID($ids['workout_id'] = $id);
+        $ids['day_id'] = $id;
+        return (new DaysModel)->showID($ids);
     }
 }

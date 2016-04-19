@@ -62,7 +62,7 @@ class Actions extends BaseModel
      *
      * @return mixed
      */
-    protected function getId($table, $selectArray, $where, $id)
+    protected function getId($table, $selectArray, $where)
     {
         $data = new \stdClass;
 
@@ -71,16 +71,19 @@ class Actions extends BaseModel
                 throw new \Exception('Column set needs to be in array format.', 400);
             }
 
-            $response = DB::table($table)
-                ->select($selectArray)
-                ->where($where, $id)
-                ->get();
+            $query = DB::table($table)->select($selectArray);
+
+            foreach($where as $k => $v) {
+                $query->where($k, $v);
+            }
+
+            $response = $query->get();
 
             if(empty($response) === true) {
                 throw new \Exception(sprintf('There was no response from the %s table', $table), 404);
             }
 
-            $reformattedResponse = $this->jsonMap(get_object_vars($response[0]));
+            $reformattedResponse = $this->jsonMap($response);
 
             $data->response = $reformattedResponse;
             $data->code = 200;
@@ -148,22 +151,27 @@ class Actions extends BaseModel
      *
      * @return mixed
      */
-    protected function setUpdate($table, $where, $request, $id, $prefix = '')
+    protected function setUpdate($table, $where, $request, $prefix = '')
     {
         $data = new \stdClass();
         if(empty($prefix) === false) {
+            var_dump($request);
             $data->inputs = $this->setPrefix($request->input(), $prefix);
         } else {
             $data->inputs = $request->input();
         }
 
         try{
-            $return = DB::table($table)
-                ->where($where, $id)
-                ->update($data->inputs);
+            $query = DB::table($table);
+
+            foreach($where as $k => $v) {
+                $query->where($k, $v);
+            }
+
+            $return = $query->update($data->inputs);
 
             if($return === false) {
-                throw new \Exception(sprintf("Data update failed on id %s in %s table", $id, $table), 400);
+                throw new \Exception(sprintf("Data update failed on id %s in %s table", $table), 400);
             }
 
             $data->code = 200;
@@ -245,7 +253,7 @@ class Actions extends BaseModel
      */
     protected function setPrefix($inputs, $prefix)
     {
-        $data = [];
+        $data = array();
         foreach ($inputs as $name => $input) {
             $name = sprintf($prefix . '%s', $name);
             $data[$name] = $input;
@@ -257,9 +265,12 @@ class Actions extends BaseModel
     {
         $response = array();
         foreach($array as $k => $v) {
-            $response[$k] = (is_object($decoded = json_decode($v)) === true) ? $decoded : $v;
+            if(is_object($v) === true) {
+                $response[$k] = $this->jsonMap($v);
+            } else {
+                $response[$k] = (is_object($decoded = json_decode($v)) === true) ? $decoded : $v;
+            }
         }
-
         return $response;
     }
 }

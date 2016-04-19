@@ -33,26 +33,38 @@ class WorkoutsHasExercisesController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int    $w_id
+     * @param  mixed  $e_id
      *
      * @return mixed
      */
-    public function show($id)
+    public function show($w_id, $e_id = '')
     {
-        return (new WorkoutsHasExercisesModel)->showID($id);
+        $ids['workout_id'] = $w_id;
+        if(empty($e_id) === false) {
+            $ids['exercise_id'] = $e_id;
+        }
+
+        return (new WorkoutsHasExercisesModel)->showID($ids);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  int    $w_id
+     * @param  mixed  $e_id
      *
      * @return mixed
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $w_id, $e_id = '')
     {
-        return (new WorkoutsHasExercisesModel)->putUpdate($request, $id);
+        $ids['workout_id'] = $w_id;
+        if(empty($e_id) === false) {
+            $ids['exercise_id'] = $e_id;
+        }
+
+        return (new WorkoutsHasExercisesModel)->putUpdate($request, $ids);
     }
 
     /**

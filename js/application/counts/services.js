@@ -1,11 +1,11 @@
 'use strict';
 
 wc
-    .module('workout.service', ['ngResource'])
-    .factory('WorkoutService', ['API', 'ResponseFactory', '$http',
+    .module('countServiceModule', ['ngResource'])
+    .factory('CountService', ['API', 'ResponseFactory', '$http',
         function(API, ResponseFactory, $http) {
 
-            var url = API.parts +  + '/workout',
+            var url = API.parts +  + '/exercise-counts',
                 response = ResponseFactory,
                 resource;
 
@@ -14,26 +14,18 @@ wc
                 return response(resource);
             };
 
-            this.getAll = function() {
-                resource = $http.get(url + '/');
-                return response(resource);
-            };
-
             this.post = function(params) {
                 resource = $http.post(url, params);
-
                 return response(resource);
             };
 
             this.put = function(id, params) {
                 resource = $http.put(url + '/' + id, params);
-
                 return response(resource);
             };
 
             this.remove = function(id) {
                 resource = $http.delete(url + '/' + id);
-
                 return response(resource);
             };
 

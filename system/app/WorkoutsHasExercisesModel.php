@@ -42,10 +42,10 @@ class WorkoutsHasExercisesModel extends BaseModel
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $ids
      * @return Response
      */
-    public function showId($id)
+    public function showId($ids)
     {
         $array = array(
             'exercise_id',
@@ -57,8 +57,7 @@ class WorkoutsHasExercisesModel extends BaseModel
         return $this->getId(
             'workouts_has_exercise',
             $array,
-            'workout_id',
-            $id
+            $ids
         );
     }
 
@@ -66,17 +65,15 @@ class WorkoutsHasExercisesModel extends BaseModel
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  int  $ids
      * @return Response
      */
-    public function putUpdate($request, $id)
+    public function putUpdate($request, $ids)
     {
         return $this->setUpdate(
-            '',
             'workouts_has_exercise',
-            'workout_id',
-            $request,
-            $id
+            $ids,
+            $request
         );
     }
 

@@ -2,7 +2,7 @@
 
 use App\View as BaseView;
 
-class WorkoutsView extends BaseView
+class DaysModel extends BaseView
 {
     /**
      * Display a listing of the resource.
@@ -11,7 +11,7 @@ class WorkoutsView extends BaseView
      */
     public function showAll()
     {
-        return $this->getAll('workouts_v');
+        return $this->getAll('days');
     }
 
     /**
@@ -23,16 +23,12 @@ class WorkoutsView extends BaseView
     public function showId($id)
     {
         $array = array(
-            'workout_name',
-            'workout_days',
-            'day_name',
-            'count',
-            'exercise_name',
-            'exercise_weight'
+            'day_id',
+            'day_name'
         );
 
         return $this->getId(
-            'workouts_v',
+            'days',
             $array,
             $id
         );

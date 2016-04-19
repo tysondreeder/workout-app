@@ -1,6 +1,6 @@
-exercises.controllers = angular.module('appConfig.controllers', ['appConfig.services']);
+exercises.controllers = angular.module('exercises.controllers', ['exercises.services']);
 
-exercises.controllers.controller('appConfigController', ['$scope', 'AppConfigFactory', function($scope, config) {
+exercises.controllers.controller('exercisesController', ['$scope', 'ExercisesFactory', function($scope, config) {
     //var user = UserFactory;
     //var params = {
     //    email: 'juliane302@hotmail.com',

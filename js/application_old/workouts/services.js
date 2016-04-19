@@ -1,15 +1,63 @@
 workouts.services = angular.module('workouts.services', ['ngResource']);
 
-workouts.services.factory('WorkoutsApiFactory', ['URISettings', function (URISettings) {
-    var url = {};
-    url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
-    return {
-        counts: url.parts + '/exercise-counts',
-        workouts: url.parts + '/workouts',
-        workoutCollections: url.parts + '/workout-collections',
-        workoutExercises: url.parts + '/workout-exercises'
-    };
-}]);
+workouts.url = {};
+workouts.url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
+workouts.url.api = {
+    counts: url.parts + '/exercise-counts',
+    workouts: url.parts + '/workouts',
+    workoutExercisesList: url.parts + '/workout',
+    workoutCollections: url.parts + '/workout-collections',
+    workoutExercises: url.parts + '/workout/:wid/exercise/:eid'
+};
+
+    //var Workout = function (workout) {
+    //    if(angular.isDefined(workout)) {
+    //        angular.extend(this, workout);
+    //    }
+    //};
+    //
+    //Workout.prototype.WorkoutCollections = {
+    //    get: (function(params) {
+    //        resource = $http.get(url.api.workoutCollections + '/' + params);
+    //        return response(resource);
+    //    }),
+    //    getAll: (function() {
+    //        resource = $http.get(url.api.workoutCollections);
+    //        return response(resource);
+    //    })
+    //};
+    //
+    //Workout.prototype.WorkoutExercises = function (params) {
+    //    var workout = $resource(url.api.workoutExercises),
+    //        q = $q.defer();
+    //
+    //    workout.get(params, function(resp) {
+    //        q.then(function(resp) {
+    //            q.resolve(resp);
+    //        }, function(err) {
+    //            q.reject(err);
+    //        });
+    //    });
+    //
+    //    console.log(q);
+    //
+    //    return q.promise;
+    //
+    //    //post: (function (params) {
+    //    //    resource = $http.post(url.workoutExercises, params);
+    //    //    return response(resource);
+    //    //}),
+    //    //put: (function (params) {
+    //    //    resource = $http.put(url.workoutExercises, params);
+    //    //    return response(resource);
+    //    //}),
+    //    //remove: (function (params) {
+    //    //    resource = $http.delete(url.workoutExercises, params);
+    //    //    return response(resource);
+    //    //})
+    //};
+    //
+    //return Workout;
 
 workouts.services.factory('WorkoutCollectionsFactory', ['ResponseFactory', 'WorkoutsApiFactory', '$http',
     function(ResponseFactory, WorkoutsApiFactory, $http) {
@@ -38,25 +86,25 @@ workouts.services.factory('WorkoutExercisesFactory', ['ResponseFactory', 'Workou
         response = ResponseFactory,
         resource;
 
-    this.get = function(id) {
-        resource = $http.get(url.workoutExercises + '/' + id);
+    this.get = function (params) {
+        resource = $http.get(url.workoutExercises, params);
         return response(resource);
     };
 
-    this.post = function(params) {
+    this.post = function (params) {
         resource = $http.post(url.workoutExercises, params);
 
         return response(resource);
     };
 
-    this.put = function(id, params) {
-        resource = $http.put(url.workoutExercises + '/' + id, params);
+    this.put = function (params) {
+        resource = $http.put(url.workoutExercises, params);
 
         return response(resource);
     };
 
-    this.remove = function(id) {
-        resource = $http.delete(url.workoutExercises + '/' + id);
+    this.remove = function (params) {
+        resource = $http.delete(url.workoutExercises, params);
 
         return response(resource);
     };
@@ -76,7 +124,7 @@ workouts.services.factory('WorkoutsFactory', ['ResponseFactory', 'WorkoutApiFact
         return response(resource);
     };
 
-    this.getAll = function(id) {
+    this.getAll = function() {
         resource = $http.get(url.workouts + '/');
         return response(resource);
     };

@@ -39,7 +39,8 @@ class WorkoutsController extends BaseController
      */
     public function show($id)
     {
-        return (new WorkoutsModel)->showID($id);
+        $ids['workout_id'] = $id;
+        return (new WorkoutsModel)->showID($ids);
     }
 
     /**

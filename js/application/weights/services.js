@@ -1,46 +1,41 @@
-users.services = angular.module('users.services', ['ngResource']);
+'use strict';
 
-users.services.factory('UserApiFactory', ['URISettings', function (URISettings) {
-    var url = {};
-    url.parts = URISettings.protocol + URISettings.apiUri + URISettings.version;
-    var users = {
-        user: url.parts + '/users',
-        data: url.parts + '/user-collections'
-    };
+wc
+    .module('workout.service', ['ngResource'])
+    .factory('WorkoutService', ['API', 'ResponseFactory', '$http',
+        function(API, ResponseFactory, $http) {
 
-    return users;
-}]);
+            var url = API.parts +  + '/workout',
+                response = ResponseFactory,
+                resource;
 
-users.services.factory('UserFactory', ['ResponseFactory', 'UserApiFactory', '$http',
-    function(ResponseFactory, UserApiFactory, $http) {
+            this.get = function(id) {
+                resource = $http.get(url + '/' + id);
+                return response(resource);
+            };
 
-    var url = UserApiFactory,
-        response = ResponseFactory,
-        resource;
+            this.getAll = function() {
+                resource = $http.get(url + '/');
+                return response(resource);
+            };
 
-    this.get = function(id) {
-        resource = $http.get(url.data + '/' + id);
+            this.post = function(params) {
+                resource = $http.post(url, params);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.post = function(params) {
-        resource = $http.post(url.user, {params: params});
+            this.put = function(id, params) {
+                resource = $http.put(url + '/' + id, params);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.put = function(id, params) {
-        resource = $http.put(url.user + '/' + id, {params: params});
+            this.remove = function(id) {
+                resource = $http.delete(url + '/' + id);
 
-        return response(resource);
-    };
+                return response(resource);
+            };
 
-    this.delete = function(id) {
-        resource = $http.delete(url.user + '/' + id);
-
-        return response(resource);
-    };
-
-    return this;
+            return this;
 }]);

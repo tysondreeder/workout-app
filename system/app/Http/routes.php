@@ -14,15 +14,17 @@
 Route::group(['prefix' => 'v1'], function() {
     Route::resource('config', 'ConfigController');
     Route::resource('connections', 'ConnectionsController');
-    Route::resource('exercise-counts', 'CountsController');
-    Route::resource('exercises', 'ExercisesController');
-    Route::resource('shared-workouts', 'SharedWorkoutsController');
-    Route::resource('shared-workout-collections', 'SharedWorkoutsViewController');
+    Route::resource('exercise/counts', 'CountsController');
+    Route::resource('exercise/list', 'ExercisesController');
     Route::resource('users', 'UsersController');
-    Route::resource('user-collections', 'UsersViewController');
-    Route::resource('weights', 'WeightsController');
-    Route::resource('workouts', 'WorkoutsController');
-    Route::resource('workout-collections', 'WorkoutsViewController');
-    Route::resource('workout-exercises', 'WorkoutsHasExercisesController');
+    Route::resource('users/collections', 'UsersViewController');
+    Route::resource('weight/list', 'WeightsController');
+    Route::resource('workout/list', 'WorkoutsController');
+//    Route::resource('workout/list', 'WorkoutsViewController'); TODO: DO I NEED
+    Route::resource('workout/days', 'DaysController');
+    Route::resource('workout/shared', 'SharedWorkoutsController');
+    Route::resource('workout/shared/collections', 'SharedWorkoutsViewController');
+    Route::resource('workout', 'WorkoutsHasExercisesController');
+    Route::resource('workout.exercise', 'WorkoutsHasExercisesController');
     Route::resource('auth/token', 'Auth\TokenController');
 });
