@@ -5,7 +5,7 @@ wc
     .factory('CountService', ['API', 'ResponseFactory', '$http',
         function(API, ResponseFactory, $http) {
 
-            var url = API.parts +  + '/exercise-counts',
+            var url = API.parts +  + '/exercise/counts',
                 response = ResponseFactory,
                 resource;
 

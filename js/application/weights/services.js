@@ -1,11 +1,11 @@
 'use strict';
 
 wc
-    .module('workout.service', ['ngResource'])
-    .factory('WorkoutService', ['API', 'ResponseFactory', '$http',
+    .module('weightServiceModule', ['ngResource'])
+    .factory('WeightService', ['API', 'ResponseFactory', '$http',
         function(API, ResponseFactory, $http) {
 
-            var url = API.parts +  + '/workout',
+            var url = API.parts +  + '/weight/list',
                 response = ResponseFactory,
                 resource;
 

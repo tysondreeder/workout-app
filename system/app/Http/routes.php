@@ -15,7 +15,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::resource('config', 'ConfigController');
     Route::resource('connections', 'ConnectionsController');
     Route::resource('exercise/counts', 'CountsController');
-    Route::resource('exercise/list', 'ExercisesController');
+    Route::resource('exercises/list', 'ExercisesController', array('only' => array('index')));
+    Route::resource('exercise', 'ExercisesController', array('except' => array('index')));
     Route::resource('users', 'UsersController');
     Route::resource('users/collections', 'UsersViewController');
     Route::resource('weight/list', 'WeightsController');

@@ -1,7 +1,7 @@
 'use strict';
 
 wc
-    .module('workout.service', ['ngResource'])
+    .module('workoutServiceModule', ['ngResource'])
     .factory('WorkoutService', ['API', 'ResponseFactory', '$http',
         function(API, ResponseFactory, $http) {
 
@@ -21,19 +21,16 @@ wc
 
             this.post = function(params) {
                 resource = $http.post(url, params);
-
                 return response(resource);
             };
 
             this.put = function(id, params) {
                 resource = $http.put(url + '/' + id, params);
-
                 return response(resource);
             };
 
             this.remove = function(id) {
                 resource = $http.delete(url + '/' + id);
-
                 return response(resource);
             };
 

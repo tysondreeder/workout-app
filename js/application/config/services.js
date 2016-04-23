@@ -2,7 +2,7 @@
 
 wc
     .module('configServiceModule', ['ngResource'])
-    .factory('configService', ['API', 'ResponseFactory', '$http',
+    .factory('ConfigService', ['API', 'ResponseFactory', '$http',
         function(API, ResponseFactory, $http) {
 
             var url = API.parts +  + '/config',
