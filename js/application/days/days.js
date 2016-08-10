@@ -1,1 +1,0 @@
-var workouts = angular.module('workouts.module', ['workouts.services', 'workouts.controllers', 'workouts.directives']);

@@ -1,1 +1,0 @@
-var common = angular.module('common.module', ['common.services', 'common.controllers']);

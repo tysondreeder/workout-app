@@ -1,1 +1,0 @@
-var appConfig = angular.module('appConfig.module', ['appConfig.services', 'appConfig.controllers']);
