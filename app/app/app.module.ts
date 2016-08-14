@@ -1,0 +1,25 @@
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+
+import { AppComponent }  from './app.component';
+import { HeroDetailComponent } from './hero/hero-detail.component';
+
+@NgModule({
+    imports:      [
+        BrowserModule,
+        FormsModule
+    ],
+    declarations: [
+        AppComponent,
+        HeroDetailComponent
+    ],
+    bootstrap:    [
+        AppComponent
+
+    ]
+})
+export class AppModule {}
+/**
+ * Created by jam on 8/10/16.
+ */
