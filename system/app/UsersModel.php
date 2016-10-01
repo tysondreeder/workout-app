@@ -56,7 +56,6 @@ class UsersModel extends BaseModel
         return $this->getId(
             'users',
             $array,
-            'user_id',
             $id
         );
     }

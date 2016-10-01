@@ -41,7 +41,6 @@ class UsersView extends BaseView
         return $this->getId(
             'users_v',
             $array,
-            'user_id',
             $id
         );
     }

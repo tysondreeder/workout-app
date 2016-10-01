@@ -18,7 +18,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::resource('exercises/list', 'ExercisesController', array('only' => array('index')));
     Route::resource('exercise', 'ExercisesController', array('except' => array('index')));
     Route::resource('users', 'UsersController');
-    Route::resource('users/collections', 'UsersViewController');
+    Route::resource('users/collection', 'UsersViewController');
     Route::resource('weight/list', 'WeightsController');
     Route::resource('workout/list', 'WorkoutsController');
 //    Route::resource('workout/list', 'WorkoutsViewController'); TODO: DO I NEED

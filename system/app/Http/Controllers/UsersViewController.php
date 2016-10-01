@@ -11,10 +11,10 @@ class UsersViewController extends BaseController
      *
      * @return mixed
      */
-    public function index()
-    {
-        return (new UsersView)->showAll();
-    }
+//    public function index()
+//    {
+//        return (new UsersView)->showAll();
+//    }
 
     /**
      * Display the specified resource.
@@ -25,6 +25,7 @@ class UsersViewController extends BaseController
      */
     public function show($id)
     {
-        return (new UsersView)->showID($id);
+        $ids['user_id'] = $id;
+        return (new UsersView)->showID($ids);
     }
 }

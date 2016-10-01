@@ -39,7 +39,8 @@ class UsersController extends BaseController
      */
     public function show($id)
     {
-        return (new UsersModel)->showID($id);
+        $ids['user_id'] = $id;
+        return (new UsersModel)->showID($ids);
     }
 
     /**

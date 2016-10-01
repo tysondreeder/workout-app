@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Workout Name</th>
+        <th>Days of the week</th>
+    </tr>
+    </thead>
+    <tbody>
+    ${
+        for(let workout of data) {
+        `<tr>
+            <td>${workout.workout_name}</td>
+            <td>${workout.workout_days.days.join(', ')}</td>
+            <td>
+                <a href=""></a>
+            </td>
+        </tr>`
+    }
+    </tbody>
+</table>

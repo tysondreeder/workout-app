@@ -33,7 +33,6 @@ class SharedWorkoutsView extends BaseView
         return $this->getId(
             'shared_workouts_v',
             $array,
-            'connection_id',
             $id
         );
     }
