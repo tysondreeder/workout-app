@@ -10,6 +10,8 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-webpack": "^1.0.14",
-    "webpack": "^1.13.2"
+    "html-loader": "^0.4.4",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   }
 }

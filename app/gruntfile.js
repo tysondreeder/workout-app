@@ -34,6 +34,7 @@ module.exports = function(grunt) {
         // },
         webpack: {
             build: {
+                devtool: 'source-map',
                 progress: true,
                 entry: {
                     app: './src/js/entry.js'
@@ -44,11 +45,17 @@ module.exports = function(grunt) {
                     map: true
                 },
                 module: {
-                    loaders: [{
-                        test: /\.js$/,
-                        exclude: /node_modules/,
-                        loader: 'babel-loader'
-                    }]
+                    loaders: [
+                        {
+                            test: /\.js$/,
+                            exclude: /node_modules/,
+                            loader: 'babel-loader'
+
+                        },
+                        {
+                            test: /\.html$/,
+                            loader: "html"
+                        }]
                 },
                 resolve: {
                     extenstions: ['', '.js']

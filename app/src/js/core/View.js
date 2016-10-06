@@ -1,30 +1,37 @@
 import XHR from './HTTP/XHR';
 
 let rendered,
-    main;
+    $main;
 
 class View {
-    constructor(url)
+    constructor()
     {
-        if(rendered) {
-            XHR.get(url).then(function(data) {
-                return this.ready(data);
-            });
-        } else {
-            rendered = true;
-            main = document.getElementById('main-content')
-        }
+        rendered = false;
+        $main = document.getElementById('main-content');
     }
 
-    get main()
+    get $main()
     {
-        return main;
+        return $main;
     }
 
-    ready(response)
+    ready(res)
     {
-        main.innerHTML = response;
+        $main.innerHTML = res;
         this.init();
+    }
+
+    template(data)
+    {
+        let template = 'hi';
+        // if(rendered) {
+        //     XHR.get(url).then(function(data) {
+        //         return this.ready(data);
+        //     });
+        // } else {
+        //     rendered = true;
+        //     this.init();
+        // }
     }
 
     init()
