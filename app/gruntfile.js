@@ -54,7 +54,7 @@ module.exports = function(grunt) {
                         },
                         {
                             test: /\.html$/,
-                            loader: "html"
+                            loader: "babel!es6-template-string"
                         }]
                 },
                 resolve: {

@@ -6,8 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    ${
-        for(let workout of data) {
+    ${this.map(workout =>
         `<tr>
             <td>${workout.workout_name}</td>
             <td>${workout.workout_days.days.join(', ')}</td>
@@ -15,6 +14,6 @@
                 <a href=""></a>
             </td>
         </tr>`
-    }
+    ).join('\n')}
     </tbody>
 </table>

@@ -68,6 +68,10 @@
 	
 	var _View3 = _interopRequireDefault(_View2);
 	
+	var _list = __webpack_require__(5);
+	
+	var _list2 = _interopRequireDefault(_list);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -105,32 +109,7 @@
 	    }, {
 	        key: 'template',
 	        value: function template(data) {
-	            // let template = `
-	            //     <table class="table">
-	            //         <thead>
-	            //             <tr>
-	            //                 <th>Workout Name</th>
-	            //                 <th>Days of the week</th>
-	            //             </tr>
-	            //         </thead>
-	            //         <tbody>`;
-	            // for(let workout of data) {
-	            //     template += `
-	            //         <tr>
-	            //             <td>${workout.workout_name}</td>
-	            //             <td>${workout.workout_days.days.join(', ')}</td>
-	            //             <td>
-	            //                 <a href=""></a>
-	            //             </td>
-	            //         </tr>`;
-	            // }
-	            // template += `
-	            //         </tbody>
-	            //     </table>`;
-	            //
-	            // return template;
-	
-	            return __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"html?./list.html\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	            return (0, _list2.default)(data);
 	        }
 	    }]);
 	
@@ -324,6 +303,26 @@
 	}();
 	
 	exports.default = View;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	exports.default = function (ctx) {
+	    return _template.call(ctx, ctx);
+	};
+	
+	function _template() {
+	    return '<table class="table">\n    <thead>\n    <tr>\n        <th>Workout Name</th>\n        <th>Days of the week</th>\n    </tr>\n    </thead>\n    <tbody>\n    ' + this.map(function (workout) {
+	        return '<tr>\n            <td>' + workout.workout_name + '</td>\n            <td>' + workout.workout_days.days.join(', ') + '</td>\n            <td>\n                <a href=""></a>\n            </td>\n        </tr>';
+	    }).join('\n') + '\n    </tbody>\n</table>';
+	};
 
 /***/ }
 /******/ ]);

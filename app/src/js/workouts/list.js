@@ -1,6 +1,8 @@
 import ListModel from './Models/List';
 import View from '../core/View';
 
+import template from './list.html';
+
 export default class List extends View {
     constructor()
     {
@@ -23,32 +25,7 @@ export default class List extends View {
 
     template(data)
     {
-        // let template = `
-        //     <table class="table">
-        //         <thead>
-        //             <tr>
-        //                 <th>Workout Name</th>
-        //                 <th>Days of the week</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>`;
-        // for(let workout of data) {
-        //     template += `
-        //         <tr>
-        //             <td>${workout.workout_name}</td>
-        //             <td>${workout.workout_days.days.join(', ')}</td>
-        //             <td>
-        //                 <a href=""></a>
-        //             </td>
-        //         </tr>`;
-        // }
-        // template += `
-        //         </tbody>
-        //     </table>`;
-        //
-        // return template;
-
-        return require("html?./list.html");
+        return template(data);
     }
 }
 
