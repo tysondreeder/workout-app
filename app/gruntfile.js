@@ -12,32 +12,12 @@ module.exports = function(grunt) {
                 },
             },
         },
-        // concat: {
-        //     options: {
-        //         separator: ';',
-        //     },
-        //     dist: {
-        //         src: ["src/js/**/*.js"],
-        //         dest: 'src/js/entry.js',
-        //     },
-        // },
-        // babel: {
-        //     options: {
-        //         sourceMap: true,
-        //         minified: false
-        //     },
-        //     dist: {
-        //         files: {
-        //             "dist/app.bundle.js": "bundle.js"
-        //         }
-        //     }
-        // },
         webpack: {
             build: {
                 devtool: 'source-map',
                 progress: true,
                 entry: {
-                    app: './src/js/entry.js'
+                    app: './'
                 },
                 output: {
                     path: './dist/',

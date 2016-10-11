@@ -54,21 +54,70 @@
 
 	'use strict';
 	
+	__webpack_require__(2);
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _list = __webpack_require__(3);
+	
+	var _list2 = _interopRequireDefault(_list);
+	
+	var _Routes = __webpack_require__(8);
+	
+	var _Routes2 = _interopRequireDefault(_Routes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// document.getElementById('main-content').innerHTML = 'Welcome to the workout app';
+	
+	var routes = [{
+	    url: '#list',
+	    method: function method() {
+	        var list = new _list2.default();
+	        list.showList();
+	    }
+	}, {
+	    url: '#workout',
+	    method: function method() {
+	        document.getElementById('main-content').innerHTML = 'This is the work out page';
+	    }
+	}, {
+	    url: 'default',
+	    method: function method() {
+	        document.getElementById('main-content').innerHTML = 'welcome to the workout app';
+	    }
+	}];
+	
+	var route = new _Routes2.default();
+	
+	route.$on('load', routes);
+	route.$on('hashchange', routes);
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _List = __webpack_require__(2);
+	var _List = __webpack_require__(4);
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _View2 = __webpack_require__(4);
+	var _View2 = __webpack_require__(6);
 	
 	var _View3 = _interopRequireDefault(_View2);
 	
-	var _list = __webpack_require__(5);
+	var _list = __webpack_require__(7);
 	
 	var _list2 = _interopRequireDefault(_list);
 	
@@ -90,26 +139,20 @@
 	    }
 	
 	    _createClass(List, [{
-	        key: 'ready',
-	        value: function ready() {
+	        key: 'content',
+	        value: function content() {
 	            var _this2 = this;
 	
 	            var model = new _List2.default();
 	            model.get().then(function (resp) {
 	                var data = JSON.parse(resp);
-	                _this2.$main.innerHTML = _this2.template(data.response);
+	                _this2.ready(_list2.default, data.response);
 	            });
 	        }
 	    }, {
 	        key: 'showList',
 	        value: function showList() {
-	            this.ready();
-	            this.init();
-	        }
-	    }, {
-	        key: 'template',
-	        value: function template(data) {
-	            return (0, _list2.default)(data);
+	            this.content();
 	        }
 	    }]);
 	
@@ -117,14 +160,9 @@
 	}(_View3.default);
 	
 	exports.default = List;
-	
-	
-	var list = new List();
-	
-	list.ready();
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -135,7 +173,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _XHR = __webpack_require__(3);
+	var _XHR = __webpack_require__(5);
 	
 	var _XHR2 = _interopRequireDefault(_XHR);
 	
@@ -163,7 +201,7 @@
 	exports.default = List;
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -240,8 +278,8 @@
 	exports.default = new XHR();
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 6 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -250,12 +288,6 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _XHR = __webpack_require__(3);
-	
-	var _XHR2 = _interopRequireDefault(_XHR);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -272,30 +304,13 @@
 	
 	    _createClass(View, [{
 	        key: 'ready',
-	        value: function ready(res) {
-	            $main.innerHTML = res;
-	            this.init();
+	        value: function ready(template, data) {
+	            $main.innerHTML = this._template(template, data);
 	        }
 	    }, {
-	        key: 'template',
-	        value: function template(data) {
-	            var template = 'hi';
-	            // if(rendered) {
-	            //     XHR.get(url).then(function(data) {
-	            //         return this.ready(data);
-	            //     });
-	            // } else {
-	            //     rendered = true;
-	            //     this.init();
-	            // }
-	        }
-	    }, {
-	        key: 'init',
-	        value: function init() {}
-	    }, {
-	        key: '$main',
-	        get: function get() {
-	            return $main;
+	        key: '_template',
+	        value: function _template(template, data) {
+	            return template(data);
 	        }
 	    }]);
 	
@@ -305,7 +320,7 @@
 	exports.default = View;
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -323,6 +338,69 @@
 	        return '<tr>\n            <td>' + workout.workout_name + '</td>\n            <td>' + workout.workout_days.days.join(', ') + '</td>\n            <td>\n                <a href=""></a>\n            </td>\n        </tr>';
 	    }).join('\n') + '\n    </tbody>\n</table>';
 	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Routes = function () {
+	    function Routes() {
+	        _classCallCheck(this, Routes);
+	    }
+	
+	    _createClass(Routes, [{
+	        key: '$on',
+	        value: function $on(event, object) {
+	            var _this = this;
+	
+	            return window.addEventListener(event, function () {
+	                _this._set(object);
+	            });
+	        }
+	    }, {
+	        key: '_set',
+	        value: function _set(object) {
+	            var route = '';
+	            if (location.hash !== '') {
+	                route = location.hash;
+	            } else {
+	                route = 'default';
+	            }
+	            if (this._validUrl(route) === true) {
+	                this._parseRouteObject(route, object);
+	            }
+	        }
+	    }, {
+	        key: '_parseRouteObject',
+	        value: function _parseRouteObject(route, object) {
+	            object.map(function (instance) {
+	                if (route === instance.url) {
+	                    instance.method();
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_validUrl',
+	        value: function _validUrl(route) {
+	            return (/^[#a-z0-9\/]+$/i.test(route)
+	            );
+	        }
+	    }]);
+	
+	    return Routes;
+	}();
+	
+	exports.default = Routes;
 
 /***/ }
 /******/ ]);

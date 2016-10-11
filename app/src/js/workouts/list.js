@@ -1,34 +1,26 @@
-import ListModel from './Models/List';
-import View from '../core/View';
+import ListModel from './Services/List';
+import View from '../core/Utilities/View';
 
-import template from './list.html';
+import template from './Templates/list.html';
 
-export default class List extends View {
+class List extends View {
     constructor()
     {
         super();
     }
 
-    ready() {
+    content() {
         const model = new ListModel;
         model.get().then(resp => {
             let data = JSON.parse(resp);
-            this.$main.innerHTML = this.template(data.response);
+            this.ready(template, data.response);
         });
     }
 
     showList()
     {
-        this.ready();
-        this.init();
-    }
-
-    template(data)
-    {
-        return template(data);
+        this.content();
     }
 }
 
-var list = new List();
-
-list.ready();
+export default List;
