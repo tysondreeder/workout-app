@@ -13,9 +13,12 @@ const routes = [
         }
     },
     {
-        url: '#workout',
+        url: '#workout/{workoutId}/exercise/{exerciseId}',
         method: function() {
             document.getElementById('main-content').innerHTML = 'This is the work out page';
+
+
+            console.log(route.getParam('exerciseId'));
         }
     },
     {

@@ -81,9 +81,11 @@
 	        list.showList();
 	    }
 	}, {
-	    url: '#workout',
+	    url: '#workout/{workoutId}/exercise/{exerciseId}',
 	    method: function method() {
 	        document.getElementById('main-content').innerHTML = 'This is the work out page';
+	
+	        console.log(route.getParam('exerciseId'));
 	    }
 	}, {
 	    url: 'default',
@@ -334,8 +336,8 @@
 	};
 	
 	function _template() {
-	    return '<table class="table">\n    <thead>\n    <tr>\n        <th>Workout Name</th>\n        <th>Days of the week</th>\n    </tr>\n    </thead>\n    <tbody>\n    ' + this.map(function (workout) {
-	        return '<tr>\n            <td>' + workout.workout_name + '</td>\n            <td>' + workout.workout_days.days.join(', ') + '</td>\n            <td>\n                <a href=""></a>\n            </td>\n        </tr>';
+	    return '<table class="table">\n    <thead>\n    <tr>\n        <th>Workout Name</th>\n        <th>Days of the week</th>\n        <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    ' + this.map(function (workout) {
+	        return '<tr>\n            <td>' + workout.workout_name + '</td>\n            <td>' + workout.workout_days.days.join(', ') + '</td>\n            <td>\n                <a href="#workout/' + workout.workout_id + '" class="btn btn-default">View</a>\n            </td>\n        </tr>';
 	    }).join('\n') + '\n    </tbody>\n</table>';
 	};
 
@@ -356,6 +358,8 @@
 	var Routes = function () {
 	    function Routes() {
 	        _classCallCheck(this, Routes);
+	
+	        this.object = {};
 	    }
 	
 	    _createClass(Routes, [{
@@ -383,8 +387,12 @@
 	    }, {
 	        key: '_parseRouteObject',
 	        value: function _parseRouteObject(route, object) {
+	            var _this2 = this;
+	
 	            object.map(function (instance) {
-	                if (route === instance.url) {
+	                var url = instance.url.split('/');
+	                _this2._mapUrl(route, url);
+	                if (_this2._getParams(route)[0] === url[0]) {
 	                    instance.method();
 	                }
 	            });
@@ -394,6 +402,28 @@
 	        value: function _validUrl(route) {
 	            return (/^[#a-z0-9\/]+$/i.test(route)
 	            );
+	        }
+	    }, {
+	        key: '_getParams',
+	        value: function _getParams(url) {
+	            return url.split('/');
+	        }
+	    }, {
+	        key: 'getParam',
+	        value: function getParam(key) {
+	            return this.object[key];
+	        }
+	    }, {
+	        key: '_mapUrl',
+	        value: function _mapUrl(urlMap, urlArray) {
+	            var params = urlMap.split('/');
+	            var values = location.hash.split('/');
+	            for (var k in params) {
+	                if (typeof urlArray[k] !== 'undefined' && urlArray[k].search(/^{/) !== -1) {
+	                    var param = urlArray[k].slice(1, -1);
+	                    this.object[param] = values[k];
+	                }
+	            }
 	        }
 	    }]);
 	

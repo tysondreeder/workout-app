@@ -3,6 +3,7 @@
     <tr>
         <th>Workout Name</th>
         <th>Days of the week</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -11,7 +12,7 @@
             <td>${workout.workout_name}</td>
             <td>${workout.workout_days.days.join(', ')}</td>
             <td>
-                <a href=""></a>
+                <a href="#workout/${workout.workout_id}" class="btn btn-default">View</a>
             </td>
         </tr>`
     ).join('\n')}
