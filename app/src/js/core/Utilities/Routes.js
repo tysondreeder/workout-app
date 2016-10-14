@@ -4,13 +4,18 @@ class Routes
         this.object = {};
     }
 
-    $on(event, object) {
+    on(event, object) {
         return window.addEventListener(
             event,
             () => {
                 this._set(object)
             }
         );
+    }
+
+    getParam(key)
+    {
+        return this.object[key];
     }
 
     _set(object)
@@ -45,11 +50,6 @@ class Routes
     _getParams(url)
     {
         return url.split('/');
-    }
-
-    getParam(key)
-    {
-        return this.object[key];
     }
 
     _mapUrl(urlMap, urlArray)

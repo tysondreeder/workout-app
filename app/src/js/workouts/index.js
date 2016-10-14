@@ -31,11 +31,11 @@ const routes = [
 
 const route = new Routes();
 
-route.$on(
+route.on(
     'load',
     routes
 );
-route.$on(
+route.on(
     'hashchange',
     routes
 );

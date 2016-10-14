@@ -96,8 +96,8 @@
 	
 	var route = new _Routes2.default();
 	
-	route.$on('load', routes);
-	route.$on('hashchange', routes);
+	route.on('load', routes);
+	route.on('hashchange', routes);
 
 /***/ },
 /* 3 */
@@ -363,13 +363,18 @@
 	    }
 	
 	    _createClass(Routes, [{
-	        key: '$on',
-	        value: function $on(event, object) {
+	        key: 'on',
+	        value: function on(event, object) {
 	            var _this = this;
 	
 	            return window.addEventListener(event, function () {
 	                _this._set(object);
 	            });
+	        }
+	    }, {
+	        key: 'getParam',
+	        value: function getParam(key) {
+	            return this.object[key];
 	        }
 	    }, {
 	        key: '_set',
@@ -407,11 +412,6 @@
 	        key: '_getParams',
 	        value: function _getParams(url) {
 	            return url.split('/');
-	        }
-	    }, {
-	        key: 'getParam',
-	        value: function getParam(key) {
-	            return this.object[key];
 	        }
 	    }, {
 	        key: '_mapUrl',
