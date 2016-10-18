@@ -1,0 +1,22 @@
+${this.then}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Exercise</th>
+        <th>Count</th>
+        <th>Day of Week</th>
+        <th>Weight</th>
+    </tr>
+    </thead>
+    <tbody>
+    ${this.response.map(workout =>
+    `<tr>
+        <td>${workout.exercise_name}</td>
+        <td>${workout.count.set} x ${workout.count.repetitions}</td>
+        <td>${workout.day_name}</td>
+        <td>${workout.exercise_weight.lb}<button onclick="${this.instance.clickMe}">hi there</button></td>
+    </tr>`
+    ).join('\n')}
+    </tbody>
+</table>

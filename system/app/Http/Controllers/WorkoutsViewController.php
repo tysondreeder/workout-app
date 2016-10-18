@@ -25,6 +25,7 @@ class WorkoutsViewController extends BaseController
      */
     public function show($id)
     {
-        return (new WorkoutsView)->showID($ids['workout_id'] = $id);
+        $ids['workout_id'] = $id;
+        return (new WorkoutsView)->showID($ids);
     }
 }

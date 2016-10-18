@@ -15,7 +15,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::resource('config', 'ConfigController');
     Route::resource('connections', 'ConnectionsController');
     Route::resource('exercise/counts', 'CountsController');
-    Route::resource('exercises/list', 'ExercisesController', array('only' => array('index')));
+    Route::resource('exercise/list', 'ExercisesController', array('only' => array('index')));
     Route::resource('exercise', 'ExercisesController', array('except' => array('index')));
     Route::resource('users', 'UsersController');
     Route::resource('users/collection', 'UsersViewController');
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::resource('workout/days', 'DaysController');
     Route::resource('workout/shared', 'SharedWorkoutsController');
     Route::resource('workout/shared/collections', 'SharedWorkoutsViewController');
-    Route::resource('workout', 'WorkoutsHasExercisesController');
+    Route::resource('workout', 'WorkoutsViewController');
     Route::resource('workout.exercise', 'WorkoutsHasExercisesController');
     Route::resource('auth/token', 'Auth\TokenController');
 });

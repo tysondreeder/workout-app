@@ -66,13 +66,20 @@
 	
 	var _list2 = _interopRequireDefault(_list);
 	
-	var _Routes = __webpack_require__(8);
+	var _workout = __webpack_require__(8);
+	
+	var _workout2 = _interopRequireDefault(_workout);
+	
+	var _Routes = __webpack_require__(10);
 	
 	var _Routes2 = _interopRequireDefault(_Routes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// document.getElementById('main-content').innerHTML = 'Welcome to the workout app';
+	
+	
+	var route = new _Routes2.default();
 	
 	var routes = [{
 	    url: '#list',
@@ -81,11 +88,10 @@
 	        list.showList();
 	    }
 	}, {
-	    url: '#workout/{workoutId}/exercise/{exerciseId}',
+	    url: '#workout/{workoutId}',
 	    method: function method() {
-	        document.getElementById('main-content').innerHTML = 'This is the work out page';
-	
-	        console.log(route.getParam('exerciseId'));
+	        var workout = new _workout2.default();
+	        workout.showWorkout(route.getParam('workoutId'));
 	    }
 	}, {
 	    url: 'default',
@@ -93,8 +99,6 @@
 	        document.getElementById('main-content').innerHTML = 'welcome to the workout app';
 	    }
 	}];
-	
-	var route = new _Routes2.default();
 	
 	route.on('load', routes);
 	route.on('hashchange', routes);
@@ -111,9 +115,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _List = __webpack_require__(4);
+	var _Workout = __webpack_require__(4);
 	
-	var _List2 = _interopRequireDefault(_List);
+	var _Workout2 = _interopRequireDefault(_Workout);
 	
 	var _View2 = __webpack_require__(6);
 	
@@ -145,8 +149,8 @@
 	        value: function content() {
 	            var _this2 = this;
 	
-	            var model = new _List2.default();
-	            model.get().then(function (resp) {
+	            var model = new _Workout2.default();
+	            model.getAll().then(function (resp) {
 	                var data = JSON.parse(resp);
 	                _this2.ready(_list2.default, data.response);
 	            });
@@ -183,24 +187,33 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var List = function () {
-	    function List() {
-	        _classCallCheck(this, List);
+	var Workout = function () {
+	    function Workout() {
+	        _classCallCheck(this, Workout);
 	
-	        this.url = '/api/v1/workout/list';
+	        this.url = {
+	            single: '/api/v1/workout',
+	            all: '/api/v1/workout/list'
+	        };
 	    }
 	
-	    _createClass(List, [{
-	        key: 'get',
-	        value: function get() {
-	            return _XHR2.default.get(this.url);
+	    _createClass(Workout, [{
+	        key: 'getId',
+	        value: function getId(id) {
+	            var url = this.url.single + '/' + id;
+	            return _XHR2.default.get(url);
+	        }
+	    }, {
+	        key: 'getAll',
+	        value: function getAll() {
+	            return _XHR2.default.get(this.url.all);
 	        }
 	    }]);
 	
-	    return List;
+	    return Workout;
 	}();
 	
-	exports.default = List;
+	exports.default = Workout;
 
 /***/ },
 /* 5 */
@@ -343,6 +356,78 @@
 
 /***/ },
 /* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _Workout = __webpack_require__(4);
+	
+	var _Workout2 = _interopRequireDefault(_Workout);
+	
+	var _View2 = __webpack_require__(6);
+	
+	var _View3 = _interopRequireDefault(_View2);
+	
+	var _workout = __webpack_require__(9);
+	
+	var _workout2 = _interopRequireDefault(_workout);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Workout = function (_View) {
+	    _inherits(Workout, _View);
+	
+	    function Workout() {
+	        _classCallCheck(this, Workout);
+	
+	        return _possibleConstructorReturn(this, (Workout.__proto__ || Object.getPrototypeOf(Workout)).call(this));
+	    }
+	
+	    _createClass(Workout, [{
+	        key: 'content',
+	        value: function content(id) {
+	            var _this2 = this;
+	
+	            var model = new _Workout2.default();
+	            model.getId(id).then(function (resp) {
+	                var data = {
+	                    response: JSON.parse(resp).response,
+	                    instance: _this2
+	                };
+	                _this2.ready(_workout2.default, data);
+	            });
+	        }
+	    }, {
+	        key: 'showWorkout',
+	        value: function showWorkout(id) {
+	            this.content(id);
+	        }
+	    }, {
+	        key: 'clickMe',
+	        value: function clickMe() {
+	            alert('hi');
+	        }
+	    }]);
+	
+	    return Workout;
+	}(_View3.default);
+	
+	exports.default = Workout;
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -350,6 +435,30 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
+	exports.default = function (ctx) {
+	    return _template.call(ctx, ctx);
+	};
+	
+	function _template() {
+	    var _this = this;
+	
+	    return this.then + '\n\n<table class="table">\n    <thead>\n    <tr>\n        <th>Exercise</th>\n        <th>Count</th>\n        <th>Day of Week</th>\n        <th>Weight</th>\n    </tr>\n    </thead>\n    <tbody>\n    ' + this.response.map(function (workout) {
+	        return '<tr>\n        <td>' + workout.exercise_name + '</td>\n        <td>' + workout.count.set + ' x ' + workout.count.repetitions + '</td>\n        <td>' + workout.day_name + '</td>\n        <td>' + workout.exercise_weight.lb + '<button onclick="' + _this.instance.clickMe + '">hi there</button></td>\n    </tr>';
+	    }).join('\n') + '\n    </tbody>\n</table>';
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -396,8 +505,8 @@
 	
 	            object.map(function (instance) {
 	                var url = instance.url.split('/');
-	                _this2._mapUrl(route, url);
-	                if (_this2._getParams(route)[0] === url[0]) {
+	                _this2._mapUrl(url, route);
+	                if (_this2._sliceUrlParams(route)[0] === url[0]) {
 	                    instance.method();
 	                }
 	            });
@@ -409,19 +518,42 @@
 	            );
 	        }
 	    }, {
-	        key: '_getParams',
-	        value: function _getParams(url) {
+	        key: '_sliceUrlParams',
+	        value: function _sliceUrlParams(url) {
 	            return url.split('/');
 	        }
 	    }, {
 	        key: '_mapUrl',
 	        value: function _mapUrl(urlMap, urlArray) {
-	            var params = urlMap.split('/');
-	            var values = location.hash.split('/');
-	            for (var k in params) {
-	                if (typeof urlArray[k] !== 'undefined' && urlArray[k].search(/^{/) !== -1) {
-	                    var param = urlArray[k].slice(1, -1);
-	                    this.object[param] = values[k];
+	            var values = urlArray.split('/');
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
+	
+	            try {
+	                for (var _iterator = urlMap.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var _step$value = _slicedToArray(_step.value, 2);
+	
+	                    var i = _step$value[0];
+	                    var v = _step$value[1];
+	
+	                    if (v.includes('{') !== -1) {
+	                        var param = v.slice(1, -1);
+	                        this.object[param] = values[i];
+	                    }
+	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator.return) {
+	                        _iterator.return();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
 	                }
 	            }
 	        }

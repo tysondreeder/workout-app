@@ -52,7 +52,6 @@ class ExercisesModel extends BaseModel
         return $this->getId(
             'exercises',
             $array,
-            'exercise_id',
             $id
         );
     }

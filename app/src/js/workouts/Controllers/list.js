@@ -1,7 +1,7 @@
-import ListModel from './Services/List';
-import View from '../core/Utilities/View';
+import WorkoutService from '../Services/Workout';
+import View from '../../core/Utilities/View';
 
-import template from './Templates/list.html';
+import template from '../Templates/list.html';
 
 class List extends View {
     constructor()
@@ -10,8 +10,8 @@ class List extends View {
     }
 
     content() {
-        const model = new ListModel;
-        model.get().then(resp => {
+        const model = new WorkoutService;
+        model.getAll().then(resp => {
             let data = JSON.parse(resp);
             this.ready(template, data.response);
         });

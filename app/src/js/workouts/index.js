@@ -1,8 +1,12 @@
-import List from './list';
+import List from './Controllers/list';
+import Workout from './Controllers/workout';
 import Routes from '../core/Utilities/Routes';
 
 
 // document.getElementById('main-content').innerHTML = 'Welcome to the workout app';
+
+
+const route = new Routes();
 
 const routes = [
     {
@@ -13,12 +17,10 @@ const routes = [
         }
     },
     {
-        url: '#workout/{workoutId}/exercise/{exerciseId}',
+        url: '#workout/{workoutId}',
         method: function() {
-            document.getElementById('main-content').innerHTML = 'This is the work out page';
-
-
-            console.log(route.getParam('exerciseId'));
+            const  workout = new Workout();
+            workout.showWorkout(route.getParam('workoutId'));
         }
     },
     {
@@ -28,8 +30,6 @@ const routes = [
         }
     }
 ];
-
-const route = new Routes();
 
 route.on(
     'load',

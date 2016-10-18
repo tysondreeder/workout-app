@@ -35,8 +35,8 @@ class Routes
     {
         object.map(instance => {
             let url = instance.url.split('/');
-            this._mapUrl(route, url);
-            if(this._getParams(route)[0] === url[0]) {
+            this._mapUrl(url, route);
+            if(this._sliceUrlParams(route)[0] === url[0]) {
                 instance.method();
             }
         })
@@ -47,19 +47,18 @@ class Routes
         return /^[#a-z0-9\/]+$/i.test(route);
     }
 
-    _getParams(url)
+    _sliceUrlParams(url)
     {
         return url.split('/');
     }
 
     _mapUrl(urlMap, urlArray)
     {
-        let params = urlMap.split('/');
-        let values = location.hash.split('/');
-        for(var k in params) {
-            if(typeof urlArray[k] !== 'undefined' && urlArray[k].search(/^{/) !== -1) {
-                let param = urlArray[k].slice(1, -1);
-                this.object[param] = values[k];
+        let values = urlArray.split('/');
+        for(const [i, v] of urlMap.entries()) {
+            if (v.includes('{') !== -1) {
+                let param = v.slice(1, -1);
+                this.object[param] = values[i];
             }
         }
     }
